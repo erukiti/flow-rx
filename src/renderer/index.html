@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <meta charset="utf-8">
+  <title data-bind="text: title"></title>
+  <link rel="stylesheet" href="./index.css">
+  <link rel="stylesheet" href="../../vendor/font-awesome-4.4.0/css/font-awesome.min.css">
+<body>
+
+<div class="vertical">
+  <div class="panes horizontal" data-bind="foreach: panes">
+    <div class="pane">
+      <div class="pane-info">
+        <span data-bind="text: title"></span>
+
+      </div>
+      <div class="items" data-bind="foreach: items">
+        <div data-bind="html: template"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="statusbar">hoge</div>
+</div>
+
+<script>
+  window.onerror = function(message, file, line, column, err) {
+    console.dir(err.stack);
+  }
+
+  Rx = require('rx');
+  wx = require('../../node_modules/webrx/dist/web.rx');
+
+  require('coffee-script/register');
+  require('./index.coffee');
+</script>
+</body>
+</html>

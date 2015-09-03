@@ -1,0 +1,96 @@
+html {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  box-sizing: border-box;
+  display: block;
+  font-family: 'SF UI Text', 'Lucida Grande', 'Segoe UI', Ubuntu, Cantarell, sans-serif;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  background-color: #1D1E19;
+  box-sizing: border-box;
+  color: #ffffff;
+  display: block;
+  font-family: 'SF UI Text', 'Lucida Grande', 'Segoe UI', Ubuntu, Cantarell, sans-serif;
+  height: 100%;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  width: 100%;
+}
+
+.vertical {
+  height: 100%;
+	display: -webkit-flex;
+	-webkit-flex: 1;
+	-webkit-flex-flow: column;
+}
+
+.horizontal {
+	display: -webkit-flex;
+}
+
+.panes {
+  height: 100%;
+}
+
+.pane {
+  display: block;
+  width: 100%;
+}
+
+.items {
+  display: block;
+  overflow-y: scroll;
+}
+
+.status-bar {
+  background-color: #434343;
+}
+
+.tweet {
+  padding-bottom: 0.25em;
+  margin-bottom: 0.25em;
+  border-bottom: solid 1px #444444;
+}
+
+.tweet .avatar {
+  width: 48px;
+  height: 48px;
+  -webkit-border-radius: 5px;
+}
+
+.tweet .name {
+  font-size: 0.9em;
+}
+
+.tweet .screen-name {
+  font-size: 0.75em;
+}
+
+.tweet .client {
+  font-size: 0.75em;
+}
+
+.tweet .ope {
+  font-size: 0.8em;
+}
+
+.tweet .profile {
+  padding: 0.25em;
+}
+
+.tweet .body {
+  padding: 0.25em;
+  color: #cccccc;
+}
+
+.tweet .body .text {
+  font-size: 12px;
+}
