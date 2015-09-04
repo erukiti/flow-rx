@@ -33,12 +33,20 @@ class Tweet
     # timestamp_ms
     @truncated = data.truncated
 
-    @hashtags = data.entities.hashtags
-    @symbols = data.entities.symbols
-    @urls = data.entities.urls
-    @user_mentions = data.entities.user_mentions
+    @hashtags = data.entities.hashtags || []
+    @symbols = data.entities.symbols || []
+    @urls = data.entities.urls || []
+    @user_mentions = data.entities.user_mentions || []
+    @media = data.entities.media || []
 
     @user = TwitterUser.create(data.user)
+
+    if data.quoted_status
+      @quotedTweet = new Tweet(data.quoted_status)
+
+    # data.direct_message
+    # data.delete
+
 
     matched = _clientRegexp.exec(@source)
     if matched
@@ -49,3 +57,5 @@ class Tweet
     console.dir @data
 
 module.exports = Tweet
+
+# http://www.antun.net/tips/api/twitter.html

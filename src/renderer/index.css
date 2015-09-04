@@ -84,12 +84,30 @@ body {
   font-size: 10px;
 }
 
+.tweet .media-urls img {
+  max-width: 200px;
+  max-height: 200px;
+  cursor: pointer;
+}
+
 .tweet .client {
   font-size: 0.75em;
 }
 
+.tweet .urls {
+  font-size: 0.75em;
+}
+
+.tweet .urls a {
+  cursor: pointer;
+}
+
 .tweet .ope {
   font-size: 0.8em;
+}
+
+.tweet .ope .action {
+  cursor: pointer;
 }
 
 .tweet .profile {

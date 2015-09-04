@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+shell = require 'shell'
+
 TwitterAuthentication = require './twitter_authentication.coffee'
 
 class TweetViewModel
@@ -32,6 +34,19 @@ class TweetViewModel
       @retweetedByIcon = wx.property ''
       @retweetedBy = wx.property ''
 
+    @urls = wx.list()
+    for url in tweet.urls
+      @urls.push {
+        displayUrl: url.display_url
+        expandedUrl: url.expanded_url
+      }
+
+    @mediaUrls = wx.list()
+    for media in tweet.media
+      @mediaUrls.push {
+        displayUrl: media.display_url
+        mediaUrl: media.media_url
+      }
 
     @template = wx.property """
       <div class="horizontal tweet">
@@ -51,6 +66,16 @@ class TweetViewModel
           <div class="text">
             <span data-bind="text: text"></span>
           </div>
+          <div class="urls" data-bind="foreach: urls">
+            <a data-bind="command: {command: $parent.link, parameter: expandedUrl}">
+              <span class="fa fa-external-link"> <span data-bind="text: displayUrl"></span>
+            </a>
+          </div>
+          <div class="media-urls" data-bind="foreach: mediaUrls">
+            <div>
+              <img data-bind="attr: {src: mediaUrl}, command: {command: $parent.link, parameter: mediaUrl}">
+            </div>
+          </div>
           <div class="client">
             via
             <span data-bind="text: client"></span>
@@ -60,7 +85,7 @@ class TweetViewModel
             <span data-bind="text: retweetCount"></span>
             ☆
             <span data-bind="text: favoriteCount"></span>
-            <span data-bind="command: {command: etc, parameter: $data}">…</span>
+            <span class="action" data-bind="command: {command: etc, parameter: $data}">…</span>
 
           </div>
           <div class="retweeted-by" data-bind="visible: retweetedBy">
@@ -74,6 +99,10 @@ class TweetViewModel
 
     @etc = wx.command (data) =>
       console.dir data.tweet
+
+    @link = wx.command (url) =>
+      console.dir "open: #{url}"
+      shell.openExternal url
 
     @id = tweet.id
 
