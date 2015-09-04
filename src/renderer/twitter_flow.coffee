@@ -13,15 +13,16 @@
 # limitations under the License.
 
 class TweetPostViewModel
-  constructor: ->
+  constructor: (screenName) ->
     @text = wx.property ''
     @client = null
     @length = wx.property 140
     @client = wx.property null
-
+    @screenName = wx.property screenName
+    @placeholder = wx.property "ツイート @#{screenName}"
     @template = '''
       <div class="post">
-        <textarea data-bind="textInput: @text" placeholder="ツイート"></textarea>
+        <textarea data-bind="textInput: @text, attr: {placeholder: placeholder}"></textarea>
         残り <span data-bind="text: length"></span>
         <button data-bind="command: post">tweet</button>
       </div>
@@ -55,26 +56,33 @@ class TwitterFlow
 
     @name = wx.property ''
     @screenName = wx.property ''
+    @backgoundColor = wx.property ''
+    @color = wx.property ''
     @client = wx.property null
 
     @config = config
 
     @authentication = new TwitterAuthentication()
     @authentication.observable.subscribe (packet) =>
+      console.dir JSON.parse(JSON.stringify(packet))
       @name(packet.account.name)
       @screenName(packet.account.screen_name)
+      @backgoundColor(packet.account.profile_background_color)
+      @color(packet.account.profile_link_color)
       @client(packet.client)
     @authentication.get @config.id
 
-    @tweetPostViewModel = new TweetPostViewModel()
+    @tweetPostViewModel = new TweetPostViewModel(@screenName())
 
   connect: ->
     console.log 'TwitterFlow#connect'
 
-    # @subject.onNext {
-    #   type: 'title'
-    #   title: "Twitter @"
-    # }
+    @subject.onNext {
+      type: 'title'
+      title: "Twitter @#{@name()}"
+      color: "##{@color()}"
+      backgoundColor: "##{@backgoundColor()}"
+    }
 
     @subject.onNext {
       type: 'top'
@@ -86,7 +94,6 @@ class TwitterFlow
       client.get 'statuses/home_timeline', (err, tweets, response) =>
         for data in tweets
           tweet = new Tweet(data)
-          # tweet.inspect()
           @subject.onNext {
             type: 'item'
             item: new TweetViewModel(tweet)
@@ -97,7 +104,6 @@ class TwitterFlow
         stream.on 'data', (data) =>
           if data.text
             tweet = new Tweet(data)
-            # tweet.inspect()
             @subject.onNext {
               type: 'item'
               item: new TweetViewModel(tweet)

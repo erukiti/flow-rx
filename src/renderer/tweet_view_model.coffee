@@ -26,6 +26,7 @@ class TweetViewModel
     @retweetCount = wx.property tweet.retweetCount
     @favoriteCount = wx.property tweet.favoriteCount
     @client = wx.property tweet.client
+    @profileLinkColor = wx.property "##{tweet.user.profileLinkColor}"
     @profileBackgroundColor = wx.property "##{tweet.user.profileBackgroundColor}"
     if tweet.retweetedBy
       @retweetedByIcon = wx.property tweet.retweetedBy.profileImageUrlHttps
@@ -59,7 +60,7 @@ class TweetViewModel
           </div>
         </div>
         <div class="body">
-          <div>
+          <div data-bind="style: {color: @profileLinkColor}">
             <span data-bind="text: name" class="name"></span>
             <span data-bind="text: screenName" class="screen-name"></span>
           </div>

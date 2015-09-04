@@ -54,6 +54,10 @@ body {
   background-color: #434343;
 }
 
+.title {
+  font-size: 0.75em;
+}
+
 .tweet {
   padding-bottom: 0.25em;
   margin-bottom: 0.25em;

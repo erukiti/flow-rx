@@ -9,13 +9,14 @@
 <div class="vertical">
   <div class="panes horizontal" data-bind="foreach: panes">
     <div class="pane">
-      <div class="top" data-bind="foreach: top">
-        <div data-bind="html: template">
+      <div class="top" data-bind="style: {color: color, 'background-color': backgroundColor}">
+        <div data-bind="foreach: top">
+          <div data-bind="html: template">
+          </div>
         </div>
-      </div>
-      <div class="pane-info">
-        <span data-bind="text: title"></span>
-
+        <div class="title" data-bind="text: title">
+          
+        </div>
       </div>
       <div class="items" data-bind="foreach: items">
         <div data-bind="html: template"></div>
@@ -23,7 +24,9 @@
     </div>
   </div>
 
-  <div class="statusbar">hoge</div>
+  <div class="statusbar">
+    status bar
+  </div>
 </div>
 
 <script>

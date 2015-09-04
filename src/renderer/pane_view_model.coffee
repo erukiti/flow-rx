@@ -20,6 +20,8 @@ class PaneViewModel
     @items = wx.list()
     @flow = new Flow(flowConfig)
     @top = wx.list()
+    @backgroundColor = wx.property ''
+    @color = wx.property ''
 
     @flow.observable.subscribe (packet) =>
       # console.dir packet
@@ -33,6 +35,8 @@ class PaneViewModel
 
         when 'title'
           @title packet.title
+          @backgroundColor packet.backgroundColor
+          @color packet.color
 
         when 'item'
           if packet.newer

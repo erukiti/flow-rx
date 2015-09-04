@@ -35,7 +35,7 @@ class TwitterUser
     # profile_banner_url
     # profile_image_url
     @profileImageUrlHttps = data.profile_image_url_https
-    # profile_link_color
+    @profileLinkColor = data.profile_link_color
     # profile_sidebar_border_color
     # profile_sidebar_fill_color: (...)
     # profile_text_color: (...)
