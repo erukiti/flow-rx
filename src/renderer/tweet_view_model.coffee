@@ -57,6 +57,7 @@ class TweetViewModel
           </div>
           <div data-bind="visible: retweetedByIcon">
             <img data-bind="attr: {src: retweetedByIcon}" class="retweet-avatar">
+            <span class="fa fa-retweet"></span>
           </div>
         </div>
         <div class="body">

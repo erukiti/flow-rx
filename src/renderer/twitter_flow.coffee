@@ -91,7 +91,7 @@ class TwitterFlow
 
     Rx.Observable.just(@client()).merge(@client.changed).subscribe (client) =>
       @tweetPostViewModel.setClient client
-      client.get 'statuses/home_timeline', (err, tweets, response) =>
+      client.get 'statuses/home_timeline', {count: 100}, (err, tweets, response) =>
         for data in tweets
           tweet = new Tweet(data)
           @subject.onNext {
