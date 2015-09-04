@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-TwitterAuthentication = require './twitter_authentication.coffee'
-
+TwitterFlow = require './twitter_flow.coffee'
+Flow = require './flow.coffee'
 PaneViewModel = require './pane_view_model.coffee'
 
 class MainViewModel
@@ -28,6 +28,8 @@ class MainViewModel
       @panes.push new PaneViewModel()
 
     # wx.messageBus
+
+Flow.register 'twtter', TwitterFlow
 
 mainViewModel = new MainViewModel()
 wx.applyBindings(mainViewModel)

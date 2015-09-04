@@ -9,6 +9,10 @@
 <div class="vertical">
   <div class="panes horizontal" data-bind="foreach: panes">
     <div class="pane">
+      <div class="top" data-bind="foreach: top">
+        <div data-bind="html: template">
+        </div>
+      </div>
       <div class="pane-info">
         <span data-bind="text: title"></span>
 

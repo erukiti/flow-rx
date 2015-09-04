@@ -19,6 +19,7 @@ class PaneViewModel
     @title = wx.property ''
     @items = wx.list()
     @flow = new Flow(flowConfig)
+    @top = wx.list()
 
     @flow.observable.subscribe (packet) =>
       # console.dir packet
@@ -26,8 +27,12 @@ class PaneViewModel
         when 'clear'
           @items.clear()
 
+        when 'top'
+          @top.clear()
+          @top.push packet.viewModel
+
         when 'title'
-          @title item.title
+          @title packet.title
 
         when 'item'
           if packet.newer
