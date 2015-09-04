@@ -5,6 +5,11 @@ class Tweet
   constructor: (data) ->
     @data = JSON.parse(JSON.stringify(data))
 
+    if data.retweeted_status
+      @retweetedBy = TwitterUser.create(data.user)
+
+      data = data.retweeted_status
+
     @createdAt = data.created_at
     @favoriteCount = data.favorite_count
     @favorited = data.favorited

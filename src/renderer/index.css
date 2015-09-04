@@ -66,12 +66,22 @@ body {
   -webkit-border-radius: 5px;
 }
 
+.tweet .retweet-avatar {
+  width: 24px;
+  height: 24px;
+  -webkit-border-radius: 3px;
+}
+
 .tweet .name {
   font-size: 0.9em;
 }
 
 .tweet .screen-name {
   font-size: 0.75em;
+}
+
+.tweet .retweeted-by {
+  font-size: 10px;
 }
 
 .tweet .client {

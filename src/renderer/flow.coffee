@@ -25,11 +25,23 @@ class TweetViewModel
     @favoriteCount = wx.property tweet.favoriteCount
     @client = wx.property tweet.client
     @profileBackgroundColor = wx.property "##{tweet.user.profileBackgroundColor}"
+    if tweet.retweetedBy
+      @retweetedByIcon = wx.property tweet.retweetedBy.profileImageUrlHttps
+      @retweetedBy = wx.property "#{tweet.retweetedBy.name} @#{tweet.retweetedBy.screenName}"
+    else
+      @retweetedByIcon = wx.property ''
+      @retweetedBy = wx.property ''
+
 
     @template = wx.property """
       <div class="horizontal tweet">
         <div class="profile" data-bind="style: {'background-color': profileBackgroundColor}">
-          <img data-bind="attr: {src: icon}" class="avatar">
+          <div>
+            <img data-bind="attr: {src: icon}" class="avatar">
+          </div>
+          <div data-bind="visible: retweetedByIcon">
+            <img data-bind="attr: {src: retweetedByIcon}" class="retweet-avatar">
+          </div>
         </div>
         <div class="body">
           <div>
@@ -40,7 +52,7 @@ class TweetViewModel
             <span data-bind="text: text"></span>
           </div>
           <div class="client">
-            via 
+            via
             <span data-bind="text: client"></span>
           </div>
           <div class="ope">
@@ -50,6 +62,10 @@ class TweetViewModel
             <span data-bind="text: favoriteCount"></span>
             <span data-bind="command: {command: etc, parameter: $data}">…</span>
 
+          </div>
+          <div class="retweeted-by" data-bind="visible: retweetedBy">
+            retweeted by
+            <span data-bind="text: retweetedBy"></span>
           </div>
 
         </div>
