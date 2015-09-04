@@ -26,6 +26,8 @@ class MainViewModel
         @panes.push new PaneViewModel(flowConfig)
     else
       @panes.push new PaneViewModel()
+      @panes.push new PaneViewModel()
+      @panes.push new PaneViewModel()
 
     # wx.messageBus
 

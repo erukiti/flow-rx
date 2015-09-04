@@ -51,7 +51,7 @@ class TweetViewModel
 
     @template = wx.property """
       <div class="horizontal tweet">
-        <div class="profile" data-bind="style: {'background-color': profileBackgroundColor}">
+        <div class="profile">
           <div>
             <img data-bind="attr: {src: icon}" class="avatar">
           </div>
@@ -61,7 +61,7 @@ class TweetViewModel
           </div>
         </div>
         <div class="body">
-          <div data-bind="style: {color: @profileLinkColor}">
+          <div>
             <span data-bind="text: name" class="name"></span>
             <span data-bind="text: screenName" class="screen-name"></span>
           </div>

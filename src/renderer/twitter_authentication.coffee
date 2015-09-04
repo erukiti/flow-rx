@@ -66,7 +66,6 @@ class TwitterAuthentication
     if authsJson
       auths = JSON.parse authsJson
       for id, auth of auths
-        console.dir auth
         client = _createClient auth.accessToken, auth.accessTokenSecret
         _verifyCredential.call @, id, client, auth.accessToken, auth.accessTokenSecret
 
@@ -81,8 +80,9 @@ class TwitterAuthentication
         console.error err
         console.dir err
         return
-      # FIXME: cookie 消去
       authWindow = new BrowserWindow {width: 800, height: 600}
+      authWindow.webContents.session.clearStorageData {storages: ['cookies']}, =>
+
       authWindow.webContents.on 'will-navigate', (event, url) =>
         event.preventDefault()
         if matched = url.match(/\?oauth_token=([^&]*)&oauth_verifier=([^&]*)/)

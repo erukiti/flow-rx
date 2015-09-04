@@ -30,7 +30,6 @@ app.on 'ready', ->
     # 'web-preferences': {'web-security': false}
   }
   win.loadUrl "file://#{__dirname}/../renderer/index.html"
-
   win.on 'closed', ->
     win = null
 
