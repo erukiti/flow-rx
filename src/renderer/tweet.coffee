@@ -23,7 +23,7 @@ class Tweet
     @retweetCount = data.retweet_count
     @retweeted = data.retweeted
     @source = data.source
-    # '<a href="http://twitter.com" rel="nofollow">Twitter Web Client</a>'
+
     @text = data.text
     # timestamp_ms
     @truncated = data.truncated
@@ -37,10 +37,8 @@ class Tweet
 
     matched = _clientRegexp.exec(@source)
     if matched
-      console.dir matched
       @client = matched[2]
       @clientUrl = matched[1]
-      # @client = matched
 
   inspect: ->
     console.dir @data

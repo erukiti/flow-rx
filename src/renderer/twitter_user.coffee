@@ -2,10 +2,9 @@ class TwitterUser
   _users = {}
 
   @create = (data) =>
-    if _users[data.id]
-      _users[data.id]
-    else
-      new TwitterUser(data)
+    _users[data.id] = new TwitterUser(data) unless _users[data.id]
+
+    _users[data.id]
 
   constructor: (data) ->
     # contributors_enabled
@@ -28,15 +27,16 @@ class TwitterUser
     @name = data.name
     @notifications = data.notifications
 
-    # profile_background_color: (...)
-    # profile_background_image_url: (...)
-    # profile_background_image_url_https: (...)
-    # profile_background_tile: (...)
-    # profile_banner_url: (...)
-    # profile_image_url: (...)
+    @profileBackgroundColor = data.profile_background_color
+
+    # profile_background_image_url
+    # profile_background_image_url_https
+    # profile_background_tile
+    # profile_banner_url
+    # profile_image_url
     @profileImageUrlHttps = data.profile_image_url_https
-    # profile_link_color: (...)
-    # profile_sidebar_border_color: (...)
+    # profile_link_color
+    # profile_sidebar_border_color
     # profile_sidebar_fill_color: (...)
     # profile_text_color: (...)
     # profile_use_background_image: (...)

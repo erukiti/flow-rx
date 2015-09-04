@@ -14,8 +14,6 @@
 
 TwitterAuthentication = require './twitter_authentication.coffee'
 
-request = require 'superagent'
-
 class TweetViewModel
   constructor: (tweet) ->
     @tweet = tweet
@@ -26,10 +24,11 @@ class TweetViewModel
     @retweetCount = wx.property tweet.retweetCount
     @favoriteCount = wx.property tweet.favoriteCount
     @client = wx.property tweet.client
+    @profileBackgroundColor = wx.property "##{tweet.user.profileBackgroundColor}"
 
     @template = wx.property """
       <div class="horizontal tweet">
-        <div class="profile">
+        <div class="profile" data-bind="style: {'background-color': profileBackgroundColor}">
           <img data-bind="attr: {src: icon}" class="avatar">
         </div>
         <div class="body">
