@@ -78,10 +78,6 @@ class TweetViewModel
               <img data-bind="attr: {src: mediaUrl}, command: {command: $parent.link, parameter: mediaUrl}">
             </div>
           </div>
-          <div class="client">
-            via
-            <span data-bind="text: client"></span>
-          </div>
           <div class="ope">
             <span class="fa fa-retweet"></span>
             <span data-bind="text: retweetCount"></span>
@@ -89,6 +85,8 @@ class TweetViewModel
             <span data-bind="text: favoriteCount"></span>
             <span class="action" data-bind="command: {command: etc, parameter: $data}">…</span>
 
+            via
+            <span data-bind="text: client"></span>
           </div>
           <div class="retweeted-by" data-bind="visible: retweetedBy">
             retweeted by

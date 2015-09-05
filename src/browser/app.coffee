@@ -33,6 +33,3 @@ app.on 'ready', ->
   win.on 'closed', ->
     win = null
 
-  # new Authentication consumerKey, consumerSecret, (accessToken, accessTokenSecret) =>
-  #   console.log accessToken
-  #   console.log accessTokenSecret

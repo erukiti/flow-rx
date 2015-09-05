@@ -12,23 +12,46 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+twtxt = require 'twitter-text'
+
 class TweetPostViewModel
   constructor: (screenName) ->
     @text = wx.property ''
     @client = null
-    @length = wx.property 140
     @client = wx.property null
     @screenName = wx.property screenName
     @placeholder = wx.property "ツイート @#{screenName}"
+
+    @length = wx.whenAny @text, (text) =>
+      140 - twtxt.getTweetLength(text)
+    .toProperty()
+
+    @enableClass = wx.whenAny @length, (length) =>
+      if length >= 140 || length < 0
+        'disabled'
+      else
+        'enabled'
+    .toProperty()
+
     @template = '''
-      <div class="post">
-        <textarea data-bind="textInput: @text, attr: {placeholder: placeholder}"></textarea>
-        残り <span data-bind="text: length"></span>
-        <button data-bind="command: post">tweet</button>
+      <div class="post vertical">
+        <textarea data-bind="textInput: @text, attr: {placeholder: placeholder}">
+        </textarea>
+        <div class="ope horizontal">
+          <div class="left">
+          </div>
+          <div>
+            <span data-bind="text: length"></span>
+          </div>
+          <div>
+            <button data-bind="command: post, css: enableClass">tweet</button>
+          </div>
+        </div>
       </div>
     '''
 
     @post = wx.command =>
+      return if @enableClass() == 'disabled'
       console.log 'post'
       @client().post 'statuses/update', {status: @text()}, (err, tweet, response) =>
         if err
